@@ -11,6 +11,14 @@ echo "... account logged."
 # Select a subscription to monitor with a budget
 az account set --subscription "$AZURE_SUBSCRIPTION_ID"
 
+echo "command: az monitor action-group create \
+            --action-group-name $AZURE_ACTION_GROUP_NAME \
+            --name $AZURE_ACTION_GROUP_NAME \
+            --short-name $AZURE_ACTION_SHORT_NAME \
+            --email-receivers "$AZURE_ACTION_GROUP_EMAIL" \
+            --resource-group $AZURE_RESOURCE_GROUP \
+            --query id \
+            --output tsv"
 # Create an action group with email receiver
 ActionGroupId=$(az monitor action-group create \
             --action-group-name $AZURE_ACTION_GROUP_NAME \
