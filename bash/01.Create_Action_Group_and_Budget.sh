@@ -13,10 +13,11 @@ az account set --subscription "$AZURE_SUBSCRIPTION_ID"
 
 # Create an action group with email receiver
 ActionGroupId=$(az monitor action-group create \
-            --resource-group $AZURE_RESOURCE_GROUP \
+            --action-group-name $AZURE_ACTION_GROUP_NAME \
             --name $AZURE_ACTION_GROUP_NAME \
             --short-name $AZURE_ACTION_SHORT_NAME \
             --email-receivers "$AZURE_ACTION_GROUP_EMAIL" \
+            --resource-group $AZURE_RESOURCE_GROUP \
             --query id \
             --output tsv)
 echo "Action Group created with ID: $ActionGroupId"
