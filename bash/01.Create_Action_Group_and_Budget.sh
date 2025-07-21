@@ -16,16 +16,16 @@ ActionGroupId=$(az monitor action-group create \
             --resource-group $AZURE_ACTION_GROUP_RG \
             --name $AZURE_ACTION_TAG_NAME \
             --short-name $AZURE_ACTION_SHORT_NAME \
+            --email-receivers "$AZURE_ACTION_GROUP_EMAIL" \
             --query id \
             --output tsv)
 echo "Action Group created with ID: $ActionGroupId"
 
 # Add email receiver to the action group
 az monitor action-group enable-receiver add \
-            --resource-group $AZURE_ACTION_GROUP_RG \
+            --resource-group $AZURE_ACTION_NAME_RG \
             --name $AZURE_ACTION_TAG_NAME \
-            --action-name $AZURE_ACTION_GROUP_EMAIL_RECIEVER_NAME \
-            --email-address $AZURE_ACTION_GROUP_EMAIL
+            --action-group-name $AZURE_ACTION_GROUP_EMAIL_RECIEVER_NAME
 echo "Email receiver added to action group"
  
 # Create a monthly budget that sends an email and triggers an Action Group to send a second email.
