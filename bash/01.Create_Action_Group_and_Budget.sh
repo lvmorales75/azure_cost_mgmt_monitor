@@ -13,7 +13,6 @@ az account set --subscription "$AZURE_SUBSCRIPTION_ID"
 
 echo "command: az monitor action-group create \
             --action-group-name $AZURE_ACTION_GROUP_NAME \
-            --name $AZURE_ACTION_GROUP_NAME \
             --short-name $AZURE_ACTION_SHORT_NAME \
             --email-receivers "$AZURE_ACTION_GROUP_EMAIL" \
             --resource-group $AZURE_RESOURCE_GROUP \
@@ -22,7 +21,6 @@ echo "command: az monitor action-group create \
 # Create an action group with email receiver
 ActionGroupId=$(az monitor action-group create \
             --action-group-name $AZURE_ACTION_GROUP_NAME \
-            --name $AZURE_ACTION_GROUP_NAME \
             --short-name $AZURE_ACTION_SHORT_NAME \
             --email-receivers "$AZURE_ACTION_GROUP_EMAIL" \
             --resource-group $AZURE_RESOURCE_GROUP \
@@ -36,11 +34,12 @@ echo "command: az monitor action-group enable-receiver add \
             --resource-group $AZURE_RESOURCE_GROUP \
             --action-group-name $AZURE_ACTION_GROUP_NAME"
 
-#az monitor action-group enable-receiver add \
-#            --name $AZURE_ACTION_GROUP_EMAIL_RECIEVER_NAME \
-#            --resource-group $AZURE_RESOURCE_GROUP \
-#            --action-group-name $AZURE_ACTION_GROUP_NAME
-#echo "Email receiver added to action group"
+az monitor action-group enable-receiver \
+            --name $AZURE_ACTION_GROUP_EMAIL_RECIEVER_NAME \
+            --resource-group $AZURE_RESOURCE_GROUP \
+            --action-group-name $AZURE_ACTION_GROUP_NAME
+echo "Email receiver added to action group"
+
  
 # Create a monthly budget that sends an email and triggers an Action Group to send a second email.
 # Make sure the StartDate for your monthly budget is set to the first day of the current month.

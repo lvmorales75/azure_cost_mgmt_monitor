@@ -10,7 +10,7 @@ AZURE_RESOURCE_GROUP=DEV_BF_AR_Focus_RG
 #Azure environment variables for Action Group
 AZURE_ACTION_GROUP_NAME=finops-focus-action-group
 AZURE_ACTION_GROUP_EMAIL='[{"name":"Laura","emailAddress":"lvmorales@baufest.com"}]'
-AZURE_ACTION_GROUP_EMAIL_RECIEVER_NAME=Laura V. Morales
+AZURE_ACTION_GROUP_EMAIL_RECIEVER_NAME='Laura V. Morales'
 AZURE_ACTION_GROUP_QUERY_ID=
 AZURE_ACTION_TAG_NAME=finops-focus-action-tag
 AZURE_ACTION_SHORT_NAME=ffa-sname
