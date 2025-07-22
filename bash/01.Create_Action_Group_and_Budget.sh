@@ -53,7 +53,7 @@ echo "command: az consumption budget create \
             --start-date $AZURE_BUDGET_START_DATE \
             --end-date $AZURE_BUDGET_END_DATE \
             --time-grain $AZURE_BUDGET_TIME_GRAIN \
-            --resource-group $AZURE_ACTION_GROUP_RG \
+            --resource-group $AZURE_RESOURCE_GROUP \
 
 az consumption budget create \
     --amount $AZURE_BUDGET_AMOUNT \
@@ -62,14 +62,14 @@ az consumption budget create \
     --start-date $AZURE_BUDGET_START_DATE \
     --end-date $AZURE_BUDGET_END_DATE \
     --time-grain $AZURE_BUDGET_TIME_GRAIN \
-    --resource-group $AZURE_ACTION_GROUP_RG \
+    --resource-group $AZURE_RESOURCE_GROUP \
 echo "Budget created with ID: $AZURE_BUDGET_NAME"
 echo "Budget creation completed with Action Group ID: $ActionGroupId"
 
 # Display the created budget details
-az consumption budget show 
-    --budget-name "$AZURE_BUDGET_NAME" 
-    --resource-group "$AZURE_ACTION_GROUP_RG" 
+az consumption budget show \
+    --budget-name "$AZURE_BUDGET_NAME" \
+    --resource-group "$AZURE_RESOURCE_GROUP" \
     --output table
 
 
