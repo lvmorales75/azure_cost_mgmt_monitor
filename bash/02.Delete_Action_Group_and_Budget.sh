@@ -12,11 +12,11 @@ echo "... account logged."
 echo "Selecting subscription..."
 az account set --subscription "$AZURE_SUBSCRIPTION_ID"
 
-# Delete the budget
+# Delete the budget using REST API
 echo "Deleting budget: $AZURE_BUDGET_NAME"
-az consumption budget delete \
-    --budget-name "$AZURE_BUDGET_NAME" \
-    --subscription "$AZURE_SUBSCRIPTION_ID"
+az rest \
+  --method DELETE \
+  --uri "https://management.azure.com/subscriptions/$AZURE_SUBSCRIPTION_ID/providers/Microsoft.Consumption/budgets/$AZURE_BUDGET_NAME?api-version=2019-05-01-preview"
 echo "Budget deleted successfully"
 
 # Delete the action group

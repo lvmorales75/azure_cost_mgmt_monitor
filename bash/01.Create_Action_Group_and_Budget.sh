@@ -47,21 +47,46 @@ echo "command: az consumption budget create \
             --resource-group $AZURE_RESOURCE_GROUP"
 
 echo "Creating budget..."
-# Use the subscription scope instead of resource group scope
-az consumption budget create \
-    --amount $AZURE_BUDGET_AMOUNT \
-    --budget-name $AZURE_BUDGET_NAME \
-    --category $AZURE_BUDGET_CATEGORY \
-    --start-date $AZURE_BUDGET_START_DATE \
-    --end-date $AZURE_BUDGET_END_DATE \
-    --time-grain $AZURE_BUDGET_TIME_GRAIN \
-    --subscription $AZURE_SUBSCRIPTION_ID
+# Create a JSON file for the budget definition
+cat > budget.json << EOF
+{
+  "properties": {
+    "category": "$AZURE_BUDGET_CATEGORY",
+    "amount": $AZURE_BUDGET_AMOUNT,
+    "timeGrain": "$AZURE_BUDGET_TIME_GRAIN",
+    "timePeriod": {
+      "startDate": "$AZURE_BUDGET_START_DATE",
+      "endDate": "$AZURE_BUDGET_END_DATE"
+    },
+    "notifications": {
+      "Actual_GreaterThan_80_Percent": {
+        "enabled": true,
+        "operator": "GreaterThan",
+        "threshold": 80,
+        "contactEmails": [
+          "$AZURE_ACTION_GROUP_EMAIL_RECEIVER_NAME@baufest.com"
+        ],
+        "contactGroups": [
+          "$ActionGroupId"
+        ]
+      }
+    }
+  }
+}
+EOF
+
+# Create the budget using REST API with the 2019-05-01-preview version
+az rest \
+  --method PUT \
+  --uri "https://management.azure.com/subscriptions/$AZURE_SUBSCRIPTION_ID/providers/Microsoft.Consumption/budgets/$AZURE_BUDGET_NAME?api-version=2019-05-01-preview" \
+  --body @budget.json
 
 echo "Budget created with ID: $AZURE_BUDGET_NAME"
 echo "Budget creation completed with Action Group ID: $ActionGroupId"
 
 # Display the created budget details
-az consumption budget show \
-    --budget-name "$AZURE_BUDGET_NAME" \
-    --subscription "$AZURE_SUBSCRIPTION_ID" \
-    --output table
+# Show budget details using REST API
+az rest \
+  --method GET \
+  --uri "https://management.azure.com/subscriptions/$AZURE_SUBSCRIPTION_ID/providers/Microsoft.Consumption/budgets/$AZURE_BUDGET_NAME?api-version=2019-05-01-preview" \
+  --output table
