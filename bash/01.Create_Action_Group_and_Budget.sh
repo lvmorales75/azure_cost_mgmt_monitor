@@ -75,10 +75,18 @@ cat > budget.json << EOF
 }
 EOF
 
-# Create the budget using REST API with the 2019-05-01-preview version
+echo "Budget JSON file created."
+echo cat budget.json
+
+echo "command: az rest \
+            --method PUT \
+            --uri https://management.azure.com/subscriptions/$AZURE_SUBSCRIPTION_ID/providers/Microsoft.Consumption/budgets/$AZURE_BUDGET_NAME?api-version=2023-05-01 \
+            --body @budget.json"
+
+# Create the budget using REST API with a supported API version
 az rest \
   --method PUT \
-  --uri "https://management.azure.com/subscriptions/$AZURE_SUBSCRIPTION_ID/providers/Microsoft.Consumption/budgets/$AZURE_BUDGET_NAME?api-version=2019-05-01-preview" \
+  --uri "https://management.azure.com/subscriptions/$AZURE_SUBSCRIPTION_ID/providers/Microsoft.Consumption/budgets/$AZURE_BUDGET_NAME?api-version=2023-05-01" \
   --body @budget.json
 
 echo "Budget created with ID: $AZURE_BUDGET_NAME"
@@ -88,5 +96,5 @@ echo "Budget creation completed with Action Group ID: $ActionGroupId"
 # Show budget details using REST API
 az rest \
   --method GET \
-  --uri "https://management.azure.com/subscriptions/$AZURE_SUBSCRIPTION_ID/providers/Microsoft.Consumption/budgets/$AZURE_BUDGET_NAME?api-version=2019-05-01-preview" \
+  --uri "https://management.azure.com/subscriptions/$AZURE_SUBSCRIPTION_ID/providers/Microsoft.Consumption/budgets/$AZURE_BUDGET_NAME?api-version=2023-05-01" \
   --output table
