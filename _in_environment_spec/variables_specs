@@ -9,10 +9,8 @@ AZURE_RESOURCE_GROUP=DEV_BF_AR_Focus_RG
 
 #Azure environment variables for Action Group
 AZURE_ACTION_GROUP_NAME=finops-focus-action-group
-AZURE_ACTION_GROUP_EMAIL='[{"name":"Laura","emailAddress":"lvmorales@baufest.com"}]'
-AZURE_ACTION_GROUP_EMAIL_RECIEVER_NAME='Laura V. Morales'
-AZURE_ACTION_GROUP_QUERY_ID=
-AZURE_ACTION_TAG_NAME=finops-focus-action-tag
+AZURE_ACTION_GROUP_EMAIL='[{"name":"Laura V. Morales","emailAddress":"lvmorales@baufest.com"}]'
+AZURE_ACTION_GROUP_EMAIL_RECEIVER_NAME=lvmorales
 AZURE_ACTION_SHORT_NAME=ffa-sname
 
 #Azure environment variables for budget
@@ -22,11 +20,6 @@ AZURE_BUDGET_CATEGORY=Cost
 AZURE_BUDGET_TIME_GRAIN=Monthly
 AZURE_BUDGET_START_DATE=2024-06-01
 AZURE_BUDGET_END_DATE=2025-12-31
-AZURE_BUDGET_NOTIFICATION_KEY=Key1
-AZURE_BUDGET_NOTIFICATION_ENABLED=true
-AZURE_BUDGET_NOTIFICATION_OPERATOR=GreaterThanOrEqualTo
-AZURE_BUDGET_NOTIFICATION_CONTACT_EMAILS=()
-AZURE_BUDGET_NOTIFICATION_THRESHOLD=Actual_GreaterThan_80_Percent
 
 #SENSIBLE VAIABLES AND VALUES FOR TRIALS
 #Azure environment variables client connection details
