@@ -31,6 +31,11 @@ ActionGroupId=$(az monitor action-group create \
 echo "Action Group created with ID: $ActionGroupId"
 
 # Add email receiver to the action group
+echo "command: az monitor action-group enable-receiver add \
+            --name $AZURE_ACTION_GROUP_EMAIL_RECIEVER_NAME \
+            --resource-group $AZURE_RESOURCE_GROUP \
+            --action-group-name $AZURE_ACTION_GROUP_NAME"
+
 #az monitor action-group enable-receiver add \
 #            --name $AZURE_ACTION_GROUP_EMAIL_RECIEVER_NAME \
 #            --resource-group $AZURE_RESOURCE_GROUP \
