@@ -30,17 +30,8 @@ ActionGroupId=$(az monitor action-group create \
             --output tsv)
 echo "Action Group created with ID: $ActionGroupId"
 
-# Add receiver to the action group
-echo "command: az monitor action-group enable-receiver \
-            --receiver-name $AZURE_ACTION_GROUP_EMAIL_RECEIVER_NAME \
-            --resource-group $AZURE_RESOURCE_GROUP \
-            --action-group-name $AZURE_ACTION_GROUP_NAME"
-
-az monitor action-group enable-receiver \
-            --receiver-name $AZURE_ACTION_GROUP_EMAIL_RECEIVER_NAME \
-            --resource-group $AZURE_RESOURCE_GROUP \
-            --action-group-name $AZURE_ACTION_GROUP_NAME
-echo "Receiver added to action group"
+# Receiver is already enabled when created with the action group
+echo "Receiver was created with the action group - no need to enable separately"
 
 
 # Create a monthly budget that sends an email and triggers an Action Group to send a second email.
@@ -55,6 +46,7 @@ echo "command: az consumption budget create \
             --time-grain $AZURE_BUDGET_TIME_GRAIN \
             --resource-group $AZURE_RESOURCE_GROUP \
 
+echo "Creating budget..."
 az consumption budget create \
     --amount $AZURE_BUDGET_AMOUNT \
     --budget-name $AZURE_BUDGET_NAME \
@@ -62,7 +54,8 @@ az consumption budget create \
     --start-date $AZURE_BUDGET_START_DATE \
     --end-date $AZURE_BUDGET_END_DATE \
     --time-grain $AZURE_BUDGET_TIME_GRAIN \
-    --resource-group $AZURE_RESOURCE_GROUP \
+    --resource-group $AZURE_RESOURCE_GROUP
+
 echo "Budget created with ID: $AZURE_BUDGET_NAME"
 echo "Budget creation completed with Action Group ID: $ActionGroupId"
 
@@ -71,5 +64,3 @@ az consumption budget show \
     --budget-name "$AZURE_BUDGET_NAME" \
     --resource-group "$AZURE_RESOURCE_GROUP" \
     --output table
-
-
