@@ -1,0 +1,24 @@
+{
+  "properties": {
+    "category": "Cost",
+    "amount": 100,
+    "timeGrain": "Monthly",
+    "timePeriod": {
+      "startDate": "2025-08-01",
+      "endDate": "2026-12-31"
+    },
+    "notifications": {
+      "Actual_GreaterThan_80_Percent": {
+        "enabled": true,
+        "operator": "GreaterThan",
+        "threshold": 80,
+        "contactEmails": [
+          "lvmorales@baufest.com"
+        ],
+        "contactGroups": [
+          "/subscriptions/E39D8BAF-3AB6-4DF4-A803-301004DFD034/resourceGroups/DEV_BF_AR_Focus_RG/providers/microsoft.insights/actionGroups/finops-focus-action-group"
+        ]
+      }
+    }
+  }
+}

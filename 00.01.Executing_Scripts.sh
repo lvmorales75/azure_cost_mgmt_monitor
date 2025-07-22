@@ -9,8 +9,8 @@ source ./00.01.A.Executing_Scripts.sh
 
 # 2. Execute bash scripts from 01 to 03, skipping 02.B and 04
 for script in "$BASH_SCRIPTS_DIR"/0[1-3]*.sh; do
-    # Skip 02.B*.sh and any 04*.sh
-    if [[ "$script" == *"/02.B"*".sh" ]] || [[ "$script" == *"/04"*".sh" ]]; then
+    # Skip 02.*.sh and any 04*.sh
+    if [[ "$script" == *"/02."*".sh" ]] || [[ "$script" == *"/04"*".sh" ]]; then
         echo "Script: $script - Ignored"
 	continue
     elif [[ -x "$script" ]]; then

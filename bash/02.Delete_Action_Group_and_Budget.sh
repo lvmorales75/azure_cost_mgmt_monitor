@@ -1,5 +1,10 @@
 #!/bin/bash
 # Script to delete Azure Budget and Action Group
+#!/bin/bash
+
+# Configuration variables
+source ./00.01.A.Executing_Scripts.sh
+
 #az login
 echo "Login in az"
 az ad sp create-for-rbac \
@@ -27,6 +32,5 @@ echo "Budget deleted successfully"
 echo "Deleting action group: $AZURE_ACTION_GROUP_NAME"
 az monitor action-group delete \
     --name "$AZURE_ACTION_GROUP_NAME" \
-    --resource-group "$AZURE_RESOURCE_GROUP" \
-    --yes
+    --resource-group "$AZURE_RESOURCE_GROUP"
 echo "Action group deleted successfully"
