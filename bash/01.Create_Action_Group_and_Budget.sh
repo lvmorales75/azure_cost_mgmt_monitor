@@ -44,7 +44,7 @@ echo "command: az consumption budget create \
             --start-date $AZURE_BUDGET_START_DATE \
             --end-date $AZURE_BUDGET_END_DATE \
             --time-grain $AZURE_BUDGET_TIME_GRAIN \
-            --resource-group $AZURE_RESOURCE_GROUP \
+            --resource-group $AZURE_RESOURCE_GROUP"
 
 echo "Creating budget..."
 az consumption budget create \
