@@ -16,6 +16,7 @@ echo "command: az monitor action-group create \
             --short-name $AZURE_ACTION_SHORT_NAME \
             --email-receivers "$AZURE_ACTION_GROUP_EMAIL" \
             --resource-group $AZURE_RESOURCE_GROUP \
+            --tags $AZURE_ACTION_GROUP_TAGS \
             --query id \
             --output tsv"
 # Create an action group with email receiver
@@ -24,6 +25,7 @@ ActionGroupId=$(az monitor action-group create \
             --short-name $AZURE_ACTION_SHORT_NAME \
             --email-receivers "$AZURE_ACTION_GROUP_EMAIL" \
             --resource-group $AZURE_RESOURCE_GROUP \
+            --tags $AZURE_ACTION_GROUP_TAGS \
             --query id \
             --output tsv)
 echo "Action Group created with ID: $ActionGroupId"
