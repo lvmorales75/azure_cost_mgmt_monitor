@@ -16,7 +16,7 @@ az account set --subscription "$AZURE_SUBSCRIPTION_ID"
 echo "Deleting budget: $AZURE_BUDGET_NAME"
 az consumption budget delete \
     --budget-name "$AZURE_BUDGET_NAME" \
-    --resource-group "$AZURE_RESOURCE_GROUP"
+    --subscription "$AZURE_SUBSCRIPTION_ID"
 echo "Budget deleted successfully"
 
 # Delete the action group

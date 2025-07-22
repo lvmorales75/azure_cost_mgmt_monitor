@@ -47,6 +47,7 @@ echo "command: az consumption budget create \
             --resource-group $AZURE_RESOURCE_GROUP"
 
 echo "Creating budget..."
+# Use the subscription scope instead of resource group scope
 az consumption budget create \
     --amount $AZURE_BUDGET_AMOUNT \
     --budget-name $AZURE_BUDGET_NAME \
@@ -54,7 +55,7 @@ az consumption budget create \
     --start-date $AZURE_BUDGET_START_DATE \
     --end-date $AZURE_BUDGET_END_DATE \
     --time-grain $AZURE_BUDGET_TIME_GRAIN \
-    --resource-group $AZURE_RESOURCE_GROUP
+    --subscription $AZURE_SUBSCRIPTION_ID
 
 echo "Budget created with ID: $AZURE_BUDGET_NAME"
 echo "Budget creation completed with Action Group ID: $ActionGroupId"
@@ -62,5 +63,5 @@ echo "Budget creation completed with Action Group ID: $ActionGroupId"
 # Display the created budget details
 az consumption budget show \
     --budget-name "$AZURE_BUDGET_NAME" \
-    --resource-group "$AZURE_RESOURCE_GROUP" \
+    --subscription "$AZURE_SUBSCRIPTION_ID" \
     --output table
